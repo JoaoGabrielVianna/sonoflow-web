@@ -14,7 +14,7 @@ export default function Diary() {
   const { sendDiaryData, error, setError } = useAuthContext()
 
   return (
-    <div className="w-full h-screen flex flex-col bg-diary-background bg-cover  fixed">
+    <div className="w-full h-screen flex flex-col bg-[#0F1A3B] bg-diary-background bg-cover  fixed">
       <header className="p-4 flex items-center gap-4 text-white">
         {layer.layer === 0 ? (
           <Link to='/home'>

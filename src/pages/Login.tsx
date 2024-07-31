@@ -122,7 +122,7 @@ export default function Login() {
 
 
   return (
-    <div className="h-screen w-full p-4 flex flex-col items-center bg-login-background bg-cover bg-no-repeat bg-center">
+    <div className="h-screen w-full p-4 flex flex-col items-center bg-[#0F1A3B] bg-login-background bg-cover bg-no-repeat bg-center">
 
       <img src='/sonoflow-logo.svg' alt="" />
       <main className='w-[21.9rem] p-8 flex flex-col items-center justify-center gap-6 bg-foggy-slate rounded-3xl'>
