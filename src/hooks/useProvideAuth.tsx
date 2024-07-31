@@ -53,7 +53,7 @@ const useProvideAuth = () => {
   }, [user]);
 
   useEffect(() => {
-    if (location.pathname === '/diary') {
+    if (location.pathname === '/diary' || location.pathname === '/') {
       setShowNavbar(false)
     } else {
       setShowNavbar(true)
