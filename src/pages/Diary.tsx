@@ -63,6 +63,7 @@ export default function Diary() {
                     type="Select"
                     value={layer.diaryData.timeToFallAsleep}
                     options={[
+                      'Não dormi!',
                       'Menos de 5 minutos',
                       'Menos de 10 minutos',
                       'Menos de 15 minutos',
