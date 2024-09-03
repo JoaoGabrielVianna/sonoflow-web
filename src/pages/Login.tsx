@@ -149,9 +149,9 @@ export default function Login() {
           </> :
           <>
             {/* REGISTER MODE */}
+            <AuthInput value={username} onChange={(e) => setUsername(e.target.value)} type="text" placeholder="Nome" icon={<User color="#A1A1A1" />} />
             <AuthInput value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Endereço de e-mail" icon={<Mail color="#A1A1A1" />} />
             <AuthInput value={confirmEmail} onChange={(e) => setConfirmEmail(e.target.value)} type="email" placeholder="Repitir endereço de e-mail" icon={<Mail color="#A1A1A1" />} />
-            <AuthInput value={username} onChange={(e) => setUsername(e.target.value)} type="text" placeholder="Nome" icon={<User color="#A1A1A1" />} />
             <AuthInput value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Senha" icon={<Lock color="#A1A1A1" />} />
             <AuthInput value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} type="password" placeholder="Repetir senha" icon={<Lock color="#A1A1A1" />} />
             <h1 className="text-red-600">{error}</h1>
