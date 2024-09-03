@@ -1,18 +1,25 @@
-import { AppWindow, LogOut } from "lucide-react"
+import { AppWindow, LogOut, User } from "lucide-react"
 import { SettingsItem } from "../types/settings"
 import { useAuthContext } from "../contexts/AuthContext"
+import { Outlet, useNavigate } from "react-router-dom"
 
 export default function Settings() {
   const auth = useAuthContext()
-
+  const navigate = useNavigate();
+  
   const settingsItems: SettingsItem[] = [
     {
       id: 0, label: 'Sobre o App', subItems: [
-        { id: 0, label: 'Versão do App', icon: <AppWindow />, subLabel: 'v.1.0' },
+        { id: 0, label: 'Versão do App', icon: <AppWindow />, subLabel: 'v.1.1' },
       ]
     },
     {
-      id: 1, label: 'Ações', subItems: [
+      id: 1, label: 'Configurações', subItems: [
+        { id: 0, label: 'Editar perfil', icon: <User />, onClick: () => navigate('/settings/edit-profile') },
+      ]
+    },
+    {
+      id: 2, label: 'Ações', subItems: [
         { id: 0, label: 'Sair', icon: <LogOut />, onClick: auth.logOut }
       ]
     }
@@ -42,6 +49,7 @@ export default function Settings() {
           </div>
         ))}
       </main>
+        <Outlet/>
     </div>
   )
 }

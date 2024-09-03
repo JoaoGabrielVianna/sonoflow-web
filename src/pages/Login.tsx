@@ -1,4 +1,4 @@
-import { Lock, Mail } from "lucide-react"
+import { Lock, Mail, User } from "lucide-react"
 import { useEffect, useState } from "react"
 import clsx from "clsx"
 
@@ -25,7 +25,7 @@ export default function Login() {
   const [confirmEmail, setConfirmEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
-  // const [username, setUsername] = useState<string>('')
+  const [username, setUsername] = useState<string>('')
 
   const { signIn, createAccount, setShowNavbar, error, setError } = useAuthContext()
 
@@ -83,7 +83,7 @@ export default function Login() {
   // Método para criar uma conta 
   const handleRegisterButton = async () => {
     // Verificar se todos os campos obrigatórios estão preenchidos
-    if (!email || !confirmEmail || !password || !confirmPassword) {
+    if (!email || !confirmEmail || !password || !confirmPassword || !username) {
       setError("Todos os campos são obrigatórios.");
       return;
     }
@@ -108,12 +108,18 @@ export default function Login() {
       return;
     }
 
+    // Validar o nome de usuário
+    if (username.length < 3) {
+      setError("O nome de usuário deve ter pelo menos 3 caracteres.");
+      return;
+    }
+
     // Limpar erro se todas as validações passaram
     setError('');
 
     // Aqui você pode adicionar a lógica para criar a conta
     try {
-      await createAccount(email, password);
+      await createAccount(email, password, username);
     } catch (err) {
       setError("Ocorreu um erro ao criar a conta. Tente novamente.");
     }
@@ -145,6 +151,7 @@ export default function Login() {
             {/* REGISTER MODE */}
             <AuthInput value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Endereço de e-mail" icon={<Mail color="#A1A1A1" />} />
             <AuthInput value={confirmEmail} onChange={(e) => setConfirmEmail(e.target.value)} type="email" placeholder="Repitir endereço de e-mail" icon={<Mail color="#A1A1A1" />} />
+            <AuthInput value={username} onChange={(e) => setUsername(e.target.value)} type="text" placeholder="Nome" icon={<User color="#A1A1A1" />} />
             <AuthInput value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Senha" icon={<Lock color="#A1A1A1" />} />
             <AuthInput value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} type="password" placeholder="Repetir senha" icon={<Lock color="#A1A1A1" />} />
             <h1 className="text-red-600">{error}</h1>

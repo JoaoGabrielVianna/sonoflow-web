@@ -13,7 +13,8 @@ export interface AuthContextType {
   setError: React.Dispatch<React.SetStateAction<string | undefined>>;
 
   signIn: (email: string, password: string) => Promise<void>;
-  createAccount: (email: string, password: string) => Promise<void>;
+  createAccount: (email: string, password: string, username: string) => Promise<void>;
+  updateUsernameInFirestore: (uid: string, newUsername: string) => Promise<void>;
   logOut: () => Promise<void>;
   showNavbar: boolean;
   setShowNavbar: React.Dispatch<React.SetStateAction<boolean>>;

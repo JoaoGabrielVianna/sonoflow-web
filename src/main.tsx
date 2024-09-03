@@ -8,6 +8,7 @@ import Settings from './pages/Settings.tsx'
 import './styles/index.css'
 import { AuthProvider } from './contexts/AuthContext.tsx'
 import Diary from './pages/Diary.tsx'
+import EditProfile from './pages/EditProfile.tsx'
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,14 @@ const router = createBrowserRouter([
           <AuthProvider>
             <Settings />
           </AuthProvider>
+        ,
+        children: [
+          {
+            path: 'edit-profile',
+            element:
+              <EditProfile />
+          }
+        ]
       },
       {
         path: '/diary',

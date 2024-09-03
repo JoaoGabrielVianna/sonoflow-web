@@ -9,7 +9,7 @@ import {
 } from 'firebase/auth'
 import { auth, db } from '../configs/firebaseConfig'
 import { useNavigate } from "react-router-dom";
-import { collection, doc, getDoc, getDocs, query, setDoc } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, query, setDoc, updateDoc } from "firebase/firestore";
 import type { UserType } from "../types/user";
 import type { DiaryModelProps } from "../types/diary";
 
@@ -63,7 +63,7 @@ const useProvideAuth = () => {
   /**
    * Funcao para Criar um usuário
    */
-  const createAccount = async (email: string, password: string) => {
+  const createAccount = async (email: string, password: string, username: string) => {
     setLoading(true)
     // Cria o usuário no Firebase Authentication
     const userCredencial: UserCredential = await createUserWithEmailAndPassword(auth, email, password)
@@ -71,10 +71,10 @@ const useProvideAuth = () => {
     try {
       // Obtém o usuário
       const user = userCredencial.user
-
+      
       // Adiciona um documento no Firestore com o UID do usuário
       await setDoc(doc(db, 'users', user.uid), {
-        username: user.displayName,
+        username: username,
         uid: user.uid,
         email: user.email,
         pictureUrl: user.photoURL
@@ -146,6 +146,9 @@ const useProvideAuth = () => {
     }
   }
 
+  /**
+   * Função para enviar os dados do diário
+   */
   const sendDiaryData = async (diaryData: DiaryModelProps): Promise<void> => {
     try {
       if (!user?.uid) {
@@ -173,6 +176,26 @@ const useProvideAuth = () => {
     }
   };
 
+  /**
+ * Função para atualizar o username de um usuário no Firestore
+ */
+const updateUsernameInFirestore = async (uid: string, newUsername: string) => {
+  try {
+    // Referência ao documento do usuário no Firestore
+    const userDocRef = doc(db, 'users', uid);
+
+    // Atualiza o campo username no documento do Firestore
+    await updateDoc(userDocRef, {
+      username: newUsername
+    });
+
+    console.log("Username atualizado no Firestore com sucesso!");
+
+  } catch (error) {
+    console.error("Erro ao atualizar username no Firestore:", error);
+  }
+};
+
 
   return {
     user,
@@ -186,6 +209,7 @@ const useProvideAuth = () => {
 
     signIn,
     createAccount,
+    updateUsernameInFirestore,
     logOut,
     showNavbar,
     setShowNavbar,
