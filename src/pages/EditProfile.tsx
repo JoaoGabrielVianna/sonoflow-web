@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { useAuthContext } from "../contexts/AuthContext";
 import { ArrowLeft } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 function EditProfile() {
   const [newUsername, setNewUsername] = useState<string>('')
   const {updateUsernameInFirestore, user} = useAuthContext();
-  const handleSave = () => {
+  const handleSave =  async()  => {
     if(!user || !newUsername) return
-    updateUsernameInFirestore(user.uid, newUsername)
+    await updateUsernameInFirestore(user.uid, newUsername);
+    return <Navigate to={'/home'}/>
   }
 
   return (
