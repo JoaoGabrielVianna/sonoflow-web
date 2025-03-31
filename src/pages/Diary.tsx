@@ -30,7 +30,7 @@ export default function Diary() {
       </header>
 
       <main className="h-full flex flex-col p-6">
-        <div className="flex-1 z-10">
+        <div className="flex-1">
 
           {layer.layer === 0 ?
             <layer.layer0 />
@@ -263,16 +263,17 @@ export default function Diary() {
                                   </div>
 
                                   : null}
-                              
+
           {error && <BoxAlert message="Já existe um diário para esta data. Não é permitido criar um novo diário no mesmo dia." onClose={() => setError('')} />}
         </div>
 
-        <ProgressControl
-          layer={layer.layer}
-          maxLayer={layer.maxLayer}
-          handleLayer={layer.handleLayer}
-          progressPercentage={layer.progressPercentage}
-        />
+        {layer.layer !== 11 &&
+          <ProgressControl
+            layer={layer.layer}
+            maxLayer={layer.maxLayer}
+            handleLayer={layer.handleLayer}
+            progressPercentage={layer.progressPercentage}
+          />}
       </main>
     </div>
   )
