@@ -30,7 +30,7 @@ export default function Diary() {
       </header>
 
       <main className="h-full flex flex-col p-6">
-        <div className="flex-1">
+        <div className="flex-1 z-10">
 
           {layer.layer === 0 ?
             <layer.layer0 />
