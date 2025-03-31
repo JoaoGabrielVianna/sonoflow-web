@@ -168,6 +168,7 @@ const useProvideAuth = () => {
         // Se o documento não existir, cria um novo
         await setDoc(diaryDocRef, diaryData);
         navigate('/home')
+        alert('Diário do Sono enviado com sucesso!')
         console.log("Dados do diário enviados com sucesso!");
       }
     } catch (error) {
